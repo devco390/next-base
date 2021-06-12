@@ -22,7 +22,6 @@ function MyApp({ Component, pageProps }: AppProps) {
           data-head-react="true"
         />
         <meta name="theme-color" content="#ffe600" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta
           name="description"
           content="La comunidad de compra y venta online más grande de América Latina."
