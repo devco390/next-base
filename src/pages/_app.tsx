@@ -10,36 +10,33 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme}>
       <Head>
-        <title>Meli | FrontEnd Test</title>
+        <title>Market</title>
         <base href="/" />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
+        <link href="/favicon.ico" rel="icon" data-head-react="true" />
+
         <link
-          href="https://http2.mlstatic.com/frontend-assets/ui-navigation/5.10.1/mercadolibre/favicon.svg"
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link
           rel="icon"
-          data-head-react="true"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
         />
-        <meta name="theme-color" content="#ffe600" />
-        <meta
-          name="description"
-          content="La comunidad de compra y venta online más grande de América Latina."
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
         />
-        <meta property="og:title" content="Meli | Market Place" />
-        <meta property="og:site_name" content="Meli" />
-        <meta
-          property="og:image"
-          content="https://http2.mlstatic.com/static/org-img/homesnw/mercado-libre.png?v=2"
-          data-head-react="true"
-        />
-        <meta name="twitter:image:alt" content="Meli logo" />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://www.mercadolibre.com.co/" />
-        <meta
-          property="og:description"
-          content="La comunidad de compra y venta online más grande de América Latina."
-        />
+        <meta name="theme-color" content="#90decb" />
+        <meta name="description" content="Gestion de productos" />
 
         <link
           href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
