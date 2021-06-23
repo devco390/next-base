@@ -4,7 +4,7 @@ import useUser from 'hooks/useUser'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
-import { logoutGmail } from 'firebase/Client'
+import { logoutGmail } from 'firebase/AuthSession'
 
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -12,15 +12,30 @@ import LinkMaterial from '@material-ui/core/Link'
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
 
 import * as S from './styles'
-import { IUser } from 'models/user'
+import { IUser, UserRol } from 'models/user'
 
 export type BaseTemplateProps = {
   children?: React.ReactNode
 }
 
-const ITEMS_SIDEBAR = ['dashboard', 'usuarios']
+interface IItemSidebar {
+  name: string
+  label: string
+  url: string
+  enabledRoles?: UserRol[]
+}
 
-const DEFAULT_CURRENT_ITEM = ITEMS_SIDEBAR[0]
+const ITEMS_SIDEBAR: IItemSidebar[] = [
+  { name: 'dashboard', label: 'Dashboard', url: 'dashboard' },
+  {
+    name: 'usuarios',
+    label: 'Usuarios',
+    url: 'usuarios',
+    enabledRoles: ['it_manager', 'manager']
+  }
+]
+
+const DEFAULT_CURRENT_ITEM = ITEMS_SIDEBAR[0].url
 
 const Base = ({ children }: BaseTemplateProps) => {
   const { route } = useRouter()
@@ -45,6 +60,13 @@ const Base = ({ children }: BaseTemplateProps) => {
       .catch((error) => {
         console.log(`Logout failed ${error}`)
       })
+  }
+
+  const showItemByRole = (item: IItemSidebar) => {
+    return (
+      !item.enabledRoles ||
+      (user?.rol && item.enabledRoles.indexOf(user?.rol) !== -1)
+    )
   }
 
   useEffect(() => {
@@ -103,11 +125,16 @@ const Base = ({ children }: BaseTemplateProps) => {
         <S.Sidebar className={isOpen ? 'open' : 'close'}>
           <S.Nav>
             <ul>
-              {ITEMS_SIDEBAR.map((item: string) => {
+              {ITEMS_SIDEBAR.map((item: IItemSidebar) => {
                 return (
-                  <S.SidebarItem key={item} active={item === currentItem}>
-                    <Link href={`/${item}`}>{item}</Link>
-                  </S.SidebarItem>
+                  showItemByRole(item) && (
+                    <S.SidebarItem
+                      key={item.name}
+                      active={item.url === currentItem}
+                    >
+                      <Link href={`/${item.url}`}>{item.label}</Link>
+                    </S.SidebarItem>
+                  )
                 )
               })}
             </ul>

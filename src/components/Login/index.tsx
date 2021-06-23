@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react'
 import {
-  addUser,
   findUserByEmail,
   loginWithGmail,
   setLocalStorageUserInfo,
   clearLocalStorageUserInfo
-} from 'firebase/Client'
+} from 'firebase/AuthSession'
 
 import ButtonLogin from '../ButtonLogin'
 import Snackbar from '@material-ui/core/Snackbar'
