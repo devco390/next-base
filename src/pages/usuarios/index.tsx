@@ -1,11 +1,11 @@
 import Base from 'templates/Base'
 import Loader from 'components/Loader'
+import UserList from 'components/UserList'
 import { USER_LOGIN_STATES } from 'models/login'
-import Dashboard from 'components/Dashboard'
 
 import useUser from 'hooks/useUser'
 
-const Home = () => {
+const UsersPage = () => {
   const { user } = useUser()
 
   return (
@@ -14,11 +14,11 @@ const Home = () => {
         (user === USER_LOGIN_STATES.NOT_KNOWN && <Loader loading={true} />)}
       {user && (
         <Base>
-          <Dashboard />
+          <UserList />
         </Base>
       )}
     </>
   )
 }
 
-export default Home
+export default UsersPage

@@ -1,12 +1,12 @@
 import { Story, Meta } from '@storybook/react/types-6-0'
-import Test from '.'
+import Logo from '.'
 
 export default {
-  title: 'Test',
-  component: Test
+  title: 'Logo',
+  component: Logo
 } as Meta
 
-const Template = (args: any) => <Test {...args}></Test>
+const Template = (args: any) => <Logo {...args}></Logo>
 
 export const Default: Story<any> = Template.bind({})
 Default.args = {}

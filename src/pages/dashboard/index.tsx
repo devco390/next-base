@@ -1,11 +1,11 @@
 import Base from 'templates/Base'
 import Loader from 'components/Loader'
-import { USER_LOGIN_STATES } from 'models/login'
 import Dashboard from 'components/Dashboard'
+import { USER_LOGIN_STATES } from 'models/login'
 
 import useUser from 'hooks/useUser'
 
-const Home = () => {
+const DashboardPage = () => {
   const { user } = useUser()
 
   return (
@@ -21,4 +21,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default DashboardPage
