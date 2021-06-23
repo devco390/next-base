@@ -16,12 +16,7 @@ import Loader from 'components/Loader'
 
 import * as S from './styles'
 
-import {
-  USER_STATES,
-  USER_ROLES,
-  LOGIN_STATES,
-  USER_LOGIN_STATES
-} from 'models/login'
+import { LOGIN_STATES, USER_LOGIN_STATES } from 'models/login'
 import { useSession } from 'contexts/session'
 import { IUser, IUserGmail } from 'models/user'
 
@@ -128,6 +123,7 @@ const Login = () => {
 
   const getLoginWithGmail = (userData: IUser) => {
     loginWithGmail()
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .then((response: any) => {
         const {
           credential: { accessToken, idToken },

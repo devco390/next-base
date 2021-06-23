@@ -41,7 +41,7 @@ export const LinkStyle = css`
     ${theme.typography.extraSmall}
     background-color: #ffffff;
     border: none;
-    color: ${theme.colors.primaryBlue};
+    color: ${theme.colors.primaryColor};
     outline: none;
     :hover {
       cursor: pointer;

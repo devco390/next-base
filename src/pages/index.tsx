@@ -5,11 +5,7 @@ import Dashboard from 'components/Dashboard'
 
 import useUser from 'hooks/useUser'
 
-export interface PageProps {
-  loading: boolean
-}
-
-const Home = ({ loading }: PageProps) => {
+const Home = () => {
   const { user } = useUser()
 
   return (

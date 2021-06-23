@@ -5,11 +5,7 @@ import { USER_LOGIN_STATES } from 'models/login'
 
 import useUser from 'hooks/useUser'
 
-export interface PageProps {
-  loading: boolean
-}
-
-const UsersPage = ({ loading }: PageProps) => {
+const UsersPage = () => {
   const { user } = useUser()
 
   return (

@@ -32,7 +32,9 @@ const isLocalStorageSet = (): boolean => {
   return localStorage[LOCAL_STORAGE_USER_KEY] === undefined ? false : true
 }
 
-export const onAuthStateChanged = (setUser: any) => {
+export const onAuthStateChanged = (
+  setUser: (user: IUser | null | undefined) => void
+) => {
   return firebase.auth().onAuthStateChanged((user) => {
     if (!isLocalStorageSet() || user === USER_LOGIN_STATES.NOT_LOGGED) {
       logoutGmail()

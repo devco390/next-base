@@ -1,12 +1,12 @@
-import { Story, Meta } from "@storybook/react/types-6-0";
-import ButtonLogin from ".";
+import { Story, Meta } from '@storybook/react/types-6-0'
+import ButtonLogin from '.'
 
 export default {
-  title: "ButtonLogin",
-  component: ButtonLogin,
-} as Meta;
+  title: 'ButtonLogin',
+  component: ButtonLogin
+} as Meta
 
-const Template = (args: any) => <ButtonLogin {...args}></ButtonLogin>;
+const Template = (args: any) => <ButtonLogin {...args}></ButtonLogin>
 
-export const Default: Story<any> = Template.bind({});
-Default.args = {};
+export const Default: Story<any> = Template.bind({})
+Default.args = {}

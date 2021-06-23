@@ -9,6 +9,7 @@ export type DispatchType = {
   type: string
   payload: {
     key: string
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     value: any
   }
 }

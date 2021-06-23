@@ -39,7 +39,7 @@ const DEFAULT_CURRENT_ITEM = ITEMS_SIDEBAR[0].url
 
 const Base = ({ children }: BaseTemplateProps) => {
   const { route } = useRouter()
-  const { user }: { user: IUser | undefined } = useUser()
+  const { user }: { user: IUser | undefined | null } = useUser()
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [currentItem, setCurrentItem] = useState<string>(DEFAULT_CURRENT_ITEM)
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
