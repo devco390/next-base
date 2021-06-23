@@ -16,24 +16,24 @@ function MyApp({ Component, pageProps }: AppProps) {
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
-        <link href="/favicon.ico" rel="icon" data-head-react="true" />
+        <link href="icons/favicon.ico" rel="icon" data-head-react="true" />
 
         <link
           rel="apple-touch-icon"
           sizes="180x180"
-          href="/apple-touch-icon.png"
+          href="icons/apple-touch-icon.png"
         />
         <link
           rel="icon"
           type="image/png"
           sizes="32x32"
-          href="/favicon-32x32.png"
+          href="icons/favicon-32x32.png"
         />
         <link
           rel="icon"
           type="image/png"
           sizes="16x16"
-          href="/favicon-16x16.png"
+          href="icons/favicon-16x16.png"
         />
         <meta name="theme-color" content="#90decb" />
         <meta name="description" content="Gestion de productos" />

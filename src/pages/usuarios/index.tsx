@@ -1,7 +1,7 @@
 import Base from 'templates/Base'
 import Loader from 'components/Loader'
+import UserList from 'components/UserList'
 import { USER_LOGIN_STATES } from 'models/login'
-import Dashboard from 'components/Dashboard'
 
 import useUser from 'hooks/useUser'
 
@@ -9,7 +9,7 @@ export interface PageProps {
   loading: boolean
 }
 
-const Home = ({ loading }: PageProps) => {
+const UsersPage = ({ loading }: PageProps) => {
   const { user } = useUser()
 
   return (
@@ -18,11 +18,11 @@ const Home = ({ loading }: PageProps) => {
         (user === USER_LOGIN_STATES.NOT_KNOWN && <Loader loading={true} />)}
       {user && (
         <Base>
-          <Dashboard />
+          <UserList />
         </Base>
       )}
     </>
   )
 }
 
-export default Home
+export default UsersPage
