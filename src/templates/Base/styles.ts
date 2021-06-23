@@ -19,6 +19,7 @@ export const Sidebar = styled.div`
   transform: translate3d(-300px, 0, 0);
   transition: transform 0.5s;
   z-index: 1020;
+  width: 180px;
   &.open {
     transform: translate3d(0, 0, 0);
   }

@@ -4,12 +4,15 @@ import useUser from 'hooks/useUser'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
+import { logoutGmail } from 'firebase/Client'
+
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import LinkMaterial from '@material-ui/core/Link'
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
 
 import * as S from './styles'
+import { IUser } from 'models/user'
 
 export type BaseTemplateProps = {
   children?: React.ReactNode
@@ -21,18 +24,27 @@ const DEFAULT_CURRENT_ITEM = ITEMS_SIDEBAR[0]
 
 const Base = ({ children }: BaseTemplateProps) => {
   const { route } = useRouter()
-  const { logout, user } = useUser()
+  const { user }: { user: IUser | undefined } = useUser()
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [currentItem, setCurrentItem] = useState<string>(DEFAULT_CURRENT_ITEM)
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
   const handleClickLink = (event: React.SyntheticEvent) => {
-    setAnchorEl(event.currentTarget)
+    setAnchorEl(event.currentTarget as HTMLElement)
     event.preventDefault()
   }
 
   const handleClose = () => {
     setAnchorEl(null)
+  }
+  const logout = () => {
+    logoutGmail()
+      .then(() => {
+        console.log('logout success')
+      })
+      .catch((error) => {
+        console.log(`Logout failed ${error}`)
+      })
   }
 
   useEffect(() => {

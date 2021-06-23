@@ -1,6 +1,8 @@
 import firebaseClient from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
+import { USER_LOGIN_STATES } from 'models/login'
+import { IUser } from 'models/user'
 
 const LOCAL_STORAGE_USER_KEY = 'habi-user-data'
 
@@ -28,44 +30,40 @@ export const addUser = ({ userId, email, userName, rol, state }) => {
   })
 }
 
-export const setLocalStorageUserInfo = (user) => {
-  if (user === undefined) {
-    localStorage.removeItem(LOCAL_STORAGE_USER_KEY)
-  } else {
+export const setLocalStorageUserInfo = (user: IUser | undefined | null) => {
+  if (user) {
     localStorage[LOCAL_STORAGE_USER_KEY] = JSON.stringify(user)
   }
 }
 
-export const getLocalStorageUserInfo = () => {
-  return localStorage[LOCAL_STORAGE_USER_KEY] === undefined
-    ? undefined
-    : JSON.parse(localStorage[LOCAL_STORAGE_USER_KEY])
+export const clearLocalStorageUserInfo = () => {
+  localStorage.removeItem(LOCAL_STORAGE_USER_KEY)
 }
 
-const mapUserFromFirebaseAuthToUser = (user) => {
-  const psUserData = getLocalStorageUserInfo()
-  const { displayName, email, photoURL, uid } = user
-
-  return psUserData === undefined
-    ? undefined
-    : {
-        ...psUserData,
-        displayName,
-        photoURL,
-        email,
-        uid
-      }
+export const getLocalStorageUserInfo = (): IUser | null => {
+  return localStorage[LOCAL_STORAGE_USER_KEY] === undefined
+    ? null
+    : JSON.parse(localStorage[LOCAL_STORAGE_USER_KEY])
 }
 
 export const logoutGmail = () => {
   return firebaseClient.auth().signOut()
 }
 
-export const onAuthStateChanged = (onChange) => {
-  return firebaseClient.auth().onAuthStateChanged((user) => {
-    const normalizedUser = user ? mapUserFromFirebaseAuthToUser(user) : null
+const isLocalStorageSet = (): boolean => {
+  return localStorage[LOCAL_STORAGE_USER_KEY] === undefined ? false : true
+}
 
-    onChange(normalizedUser)
+export const onAuthStateChanged = (setUser: any) => {
+  return firebaseClient.auth().onAuthStateChanged((user) => {
+    if (!isLocalStorageSet() || user === USER_LOGIN_STATES.NOT_LOGGED) {
+      logoutGmail()
+      clearLocalStorageUserInfo()
+    }
+
+    const normalizedUser = user === null ? null : getLocalStorageUserInfo()
+
+    setUser(normalizedUser)
   })
 }
 

@@ -1,25 +1,20 @@
 import { useEffect, useState } from 'react'
-import {
-  onAuthStateChanged,
-  logoutGmail,
-  getLocalStorageUserInfo
-} from 'firebase/Client'
+import { onAuthStateChanged, getLocalStorageUserInfo } from 'firebase/Client'
 import { useRouter } from 'next/router'
 
 import { USER_LOGIN_STATES } from 'models/login'
+import { IUser } from 'models/user'
 
 const LOGIN_ROUTE = `/login`
 
 export default function useUser() {
-  const [user, setUser] = useState(USER_LOGIN_STATES.NOT_KNOWN)
+  const [user, setUser] = useState<IUser | undefined>(
+    USER_LOGIN_STATES.NOT_KNOWN
+  )
   const router = useRouter()
 
   useEffect(() => {
-    if (getLocalStorageUserInfo() === undefined) {
-      logout()
-    } else {
-      onAuthStateChanged(setUser)
-    }
+    onAuthStateChanged(setUser)
   }, [])
 
   useEffect(() => {
@@ -30,15 +25,5 @@ export default function useUser() {
     }
   }, [user])
 
-  const logout = () => {
-    logoutGmail()
-      .then(() => {
-        console.log('logout success')
-      })
-      .catch((error) => {
-        console.log(`Logout failed ${error}`)
-      })
-  }
-
-  return { user, logout }
+  return { user }
 }

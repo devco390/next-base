@@ -6,7 +6,7 @@ export enum USER_STATES {
 export enum USER_ROLES {
   IT_MANAGER = 'it_manager',
   MANAGER = 'manager',
-  TECHNICAL = 'technical'
+  WAITER = 'waiter'
 }
 
 export enum LOGIN_STATES {
