@@ -2,7 +2,7 @@ import { render, screen } from 'utils/test-utils'
 
 import Image from '.'
 
-const imageUrl = '/img/logo_ml.png'
+const imageUrl = '/icons/apple-touch-icon.png'
 
 describe('<Image />', () => {
   it('should render the image', async () => {
