@@ -7,13 +7,12 @@ import { getMethodNotAllowedResponse } from 'utils/api-utils'
 
 const genericRequestService = new GenericRequestService('users')
 
-const addUser = (request: NextApiRequest, response: NextApiResponse) => {
+const updateUser = (request: NextApiRequest, response: NextApiResponse) => {
   const { body: userData } = request
-  const { email, userName, rol, state } = userData
-  genericRequestService.addRecord<IUser>(
+  const { email } = userData
+  genericRequestService.updateRecordWithKeyValidation<IUser>(
     request,
     response,
-    { email, userName, rol, state },
     'email',
     email
   )
@@ -26,11 +25,17 @@ export default function requestHandler(
   const { method } = request
 
   if (method === API_METHODS.GET) {
-    genericRequestService.getAll<IUser>(request, response)
-  } else if (method === API_METHODS.POST) {
-    addUser(request, response)
+    genericRequestService.getRecord(request, response)
+  } else if (method === API_METHODS.PUT) {
+    updateUser(request, response)
+  } else if (method === API_METHODS.DELETE) {
+    genericRequestService.deleteRecord(request, response)
   } else {
-    response.setHeader('Allow', [API_METHODS.GET, API_METHODS.POST])
+    response.setHeader('Allow', [
+      API_METHODS.GET,
+      API_METHODS.DELETE,
+      API_METHODS.PUT
+    ])
     getMethodNotAllowedResponse(`Method ${method} Not Allowed`)
   }
 }
