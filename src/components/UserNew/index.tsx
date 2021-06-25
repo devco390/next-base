@@ -1,4 +1,3 @@
-import * as S from './styles'
 import { IUser, UserRol, UserState } from 'models/user'
 
 import ContentAPI from 'services/content-api'
