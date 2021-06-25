@@ -3,6 +3,8 @@ import Logo from 'components/Logo'
 import useUser from 'hooks/useUser'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import Loader from 'components/Loader'
+import { USER_LOGIN_STATES } from 'models/login'
 
 import { logoutGmail } from 'firebase/AuthSession'
 
@@ -76,73 +78,79 @@ const Base = ({ children }: BaseTemplateProps) => {
   }, [route])
 
   return (
-    <S.Wrapper>
-      <S.Header>
-        <div>
-          <S.IconHamburger
-            className={isOpen ? 'open' : 'close'}
-            onClick={() => {
-              setIsOpen(!isOpen)
-            }}
-          >
-            <i></i>
-            <i></i>
-            <i></i>
-          </S.IconHamburger>
-          <S.HamburgerOverlay className={isOpen ? 'open' : 'close'} />
-          <S.WrapperLogo>
-            <Logo />
-          </S.WrapperLogo>
-        </div>
-        <S.LogoutWrapper>
-          <LinkMaterial href="#" onClick={handleClickLink}>
-            {user && user.userName} <ArrowDropDownIcon />
-          </LinkMaterial>
-          <Menu
-            id="simple-menu"
-            anchorEl={anchorEl}
-            getContentAnchorEl={null}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-            transformOrigin={{ vertical: 'top', horizontal: 'center' }}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-            variant={'selectedMenu'}
-          >
-            <MenuItem
-              onClick={() => {
-                handleClose()
-                logout()
-              }}
-            >
-              <S.MenuItem>Cerrar sesión</S.MenuItem>
-            </MenuItem>
-          </Menu>
-        </S.LogoutWrapper>
-      </S.Header>
+    <>
+      {user === USER_LOGIN_STATES.NOT_LOGGED ||
+        (user === USER_LOGIN_STATES.NOT_KNOWN && <Loader loading={true} />)}
+      {user && (
+        <S.Wrapper>
+          <S.Header>
+            <div>
+              <S.IconHamburger
+                className={isOpen ? 'open' : 'close'}
+                onClick={() => {
+                  setIsOpen(!isOpen)
+                }}
+              >
+                <i></i>
+                <i></i>
+                <i></i>
+              </S.IconHamburger>
+              <S.HamburgerOverlay className={isOpen ? 'open' : 'close'} />
+              <S.WrapperLogo>
+                <Logo />
+              </S.WrapperLogo>
+            </div>
+            <S.LogoutWrapper>
+              <LinkMaterial href="#" onClick={handleClickLink}>
+                {user && user?.userName} <ArrowDropDownIcon />
+              </LinkMaterial>
+              <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                getContentAnchorEl={null}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+                variant={'selectedMenu'}
+              >
+                <MenuItem
+                  onClick={() => {
+                    handleClose()
+                    logout()
+                  }}
+                >
+                  <S.MenuItem>Cerrar sesión</S.MenuItem>
+                </MenuItem>
+              </Menu>
+            </S.LogoutWrapper>
+          </S.Header>
 
-      <S.Main>
-        <S.Sidebar className={isOpen ? 'open' : 'close'}>
-          <S.Nav>
-            <ul>
-              {ITEMS_SIDEBAR.map((item: IItemSidebar) => {
-                return (
-                  showItemByRole(item) && (
-                    <S.SidebarItem
-                      key={item.name}
-                      active={item.url === currentItem}
-                    >
-                      <Link href={`/${item.url}`}>{item.label}</Link>
-                    </S.SidebarItem>
-                  )
-                )
-              })}
-            </ul>
-          </S.Nav>
-        </S.Sidebar>
-        <S.Content>{children}</S.Content>
-      </S.Main>
-    </S.Wrapper>
+          <S.Main>
+            <S.Sidebar className={isOpen ? 'open' : 'close'}>
+              <S.Nav>
+                <ul>
+                  {ITEMS_SIDEBAR.map((item: IItemSidebar) => {
+                    return (
+                      showItemByRole(item) && (
+                        <S.SidebarItem
+                          key={item.name}
+                          active={item.url === currentItem}
+                        >
+                          <Link href={`/${item.url}`}>{item.label}</Link>
+                        </S.SidebarItem>
+                      )
+                    )
+                  })}
+                </ul>
+              </S.Nav>
+            </S.Sidebar>
+            <S.Content>{children}</S.Content>
+          </S.Main>
+        </S.Wrapper>
+      )}
+    </>
   )
 }
 

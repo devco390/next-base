@@ -176,6 +176,7 @@ export const IconHamburger = styled.a`
 export const Main = styled.div`
   display: grid;
   grid-template-columns: 1fr;
+  overflow: auto;
 `
 
 export const HamburgerOverlay = styled.div`
@@ -201,6 +202,8 @@ export const Content = styled.div`
   ${({ theme }) => css`
     ${theme.typography.mediumBold}
     background: ${theme.colors.background};
+    display: flex;
+    justify-content: center;
     padding: 2rem;
   `}
 `
