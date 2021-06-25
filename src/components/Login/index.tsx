@@ -19,15 +19,9 @@ import * as S from './styles'
 import { LOGIN_STATES, USER_LOGIN_STATES } from 'models/login'
 import { useSession } from 'contexts/session'
 import { IUser, IUserGmail } from 'models/user'
+import { validateEmail } from 'utils/form-utils'
 
 export const MESSAGE_MODAL_GMAIL_OPEN = 'Esperando inicio de sesión en Gmail'
-
-const validateEmail = (email: string): boolean => {
-  const re =
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-
-  return re.test(String(email).toLowerCase())
-}
 
 const Login = () => {
   const {
@@ -142,28 +136,6 @@ const Login = () => {
         flowErrorLoginWithGmail()
       })
   }
-
-  // const addnewUser = () => {
-  //   const userId = 'Y7zwDwTCtKd1kOZSgHyMHn5DQ3U2'
-  //   const email = 'danieling1990@gmail.com'
-  //   const userName = 'daniel perez'
-  //   const rol = USER_ROLES.IT_MANAGER
-  //   const state = USER_STATES.ACTIVE
-
-  //   addUser({
-  //     userId,
-  //     email,
-  //     userName,
-  //     rol,
-  //     state
-  //   })
-  //     .then((response) => {
-  //       console.log(response)
-  //     })
-  //     .catch((err) => {
-  //       console.error(err)
-  //     })
-  // }
 
   const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target

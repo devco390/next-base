@@ -6,7 +6,7 @@ export default {
   component: Image
 } as Meta
 
-const imageUrl = '/img/logo_ml.png'
+const imageUrl = '/icons/apple-touch-icon.png'
 
 const Template = () => (
   <div

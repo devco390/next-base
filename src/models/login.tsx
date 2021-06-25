@@ -1,12 +1,12 @@
 export enum USER_STATES {
-  ACTIVE = 'active',
-  INACTIVE = 'inactive'
+  active = 'Activo',
+  inactive = 'Inactivo'
 }
 
 export enum USER_ROLES {
-  IT_MANAGER = 'it_manager',
-  MANAGER = 'manager',
-  WAITER = 'waiter'
+  it_manager = 'IT manager',
+  manager = 'Administrador',
+  waiter = 'Mesero'
 }
 
 export enum LOGIN_STATES {
